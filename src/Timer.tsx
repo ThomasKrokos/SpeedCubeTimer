@@ -19,6 +19,7 @@ const Timer = () => {
         });
       }, 10);
     } else if (!running) {
+      if(record == 0 || miliseconds < record)
       setRecord(miliseconds)
 
     }
@@ -37,7 +38,7 @@ const Timer = () => {
         title="Press Me"
       />
 
-<Text>Last solve: {record}</Text>
+<Text>Fastest solve: {record}</Text>
 
       <StatusBar style="auto" />
     </View>
