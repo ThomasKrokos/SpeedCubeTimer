@@ -43,14 +43,14 @@ const Timer = () => {
   return (
     <View style={styles.container}>
       <Text>{getTime(miliseconds)}</Text>
+
       <Button
         onPress={() => {
           setRunning((running) => !running);
         }}
         title="Click to start time"
       />
-      
-      <Text>Fastest solve: {getTime(record)}</Text>
+      <Text>{record ? ("Fastest solve: "+ getTime(record)) : null}</Text>
       <Button
         onPress={() => {
           setRecord(0);
@@ -64,11 +64,17 @@ const Timer = () => {
 
 export default Timer;
 
+/**
+ * https://reactnative.dev/docs/style
+ * https://reactnative.dev/docs/height-and-width
+ * https://reactnative.dev/docs/view
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
 });
