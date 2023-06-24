@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
@@ -42,21 +42,28 @@ const Timer = () => {
 
   return (
     <View style={styles.container}>
-      <Text>{getTime(miliseconds)}</Text>
+      <View style={styles.container}>
+  
+        <TouchableWithoutFeedback           
+            onPress={() => {
+            setRunning((running) => !running);
+          }}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>{getTime(miliseconds)}</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
 
-      <Button
-        onPress={() => {
-          setRunning((running) => !running);
-        }}
-        title="Click to start time"
-      />
-      <Text>{record ? ("Fastest solve: "+ getTime(record)) : null}</Text>
-      <Button
-        onPress={() => {
-          setRecord(0);
-        }}
-        title="Clear Best Time"
-      />
+      <View>
+        <Text>{record ? "Fastest solve: " + getTime(record) : null}</Text>
+        <Button
+          onPress={() => {
+            setRecord(0);
+          }}
+          title="Clear Best Time"
+        />
+      </View>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -76,5 +83,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+  },
+
+  button: {
+    marginBottom: 30,
+    width: 260,
+    alignItems: 'center',
+    backgroundColor: '#2196F3',
+    flex: 1
+  },
+  buttonText: {
+    textAlign: 'center',
+    justifyContent: "center",
+    flex: 1,
+    padding: 20,
+    color: 'white',
   },
 });
