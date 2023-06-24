@@ -1,4 +1,11 @@
-import { Button, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Button,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
@@ -18,7 +25,7 @@ const Timer = () => {
         setMiliseconds((miliseconds) => {
           return (miliseconds = miliseconds + 1);
         });
-      }, 1);
+      }, 10);
     } else if (!running) {
       if (record == 0 || miliseconds < record) setRecord(miliseconds);
     }
@@ -43,25 +50,30 @@ const Timer = () => {
   return (
     <View style={styles.container}>
       <View style={styles.container}>
-  
-        <TouchableWithoutFeedback           
-            onPress={() => {
+        <TouchableWithoutFeedback
+          onPress={() => {
             setRunning((running) => !running);
-          }}>
-          <View style={styles.button}>
+          }}
+        >
+          <View style={styles.touchScreen}>
             <Text style={styles.buttonText}>{getTime(miliseconds)}</Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
 
       <View>
-        <Text>{record ? "Fastest solve: " + getTime(record) : null}</Text>
-        <Button
+        <Text style={styles.text}>
+          {record ? "Best Time: " + getTime(record) : null}
+        </Text>
+
+        <Pressable
+          style={styles.button}
           onPress={() => {
             setRecord(0);
           }}
-          title="Clear Best Time"
-        />
+        >
+          <Text style={styles.text}>Clear Best Time</Text>
+        </Pressable>
       </View>
 
       <StatusBar style="auto" />
@@ -79,24 +91,30 @@ export default Timer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+    backgroundColor: "#b0ffb0",
   },
 
-  button: {
-    marginBottom: 30,
-    width: 260,
-    alignItems: 'center',
-    backgroundColor: '#2196F3',
-    flex: 1
+  touchScreen: {
+    width: "100%",
+    alignItems: "center",
+    flex: 1,
+    marginBottom: "5%",
   },
   buttonText: {
-    textAlign: 'center',
-    justifyContent: "center",
+    color: "#666666",
     flex: 1,
     padding: 20,
-    color: 'white',
+    marginTop: "70%",
+    fontSize: "50%",
+    fontWeight: "bold",
+  },
+
+  text: {
+    color: "#666666",
+  },
+  button: {
   },
 });
